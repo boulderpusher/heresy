@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://de6t0scxajica"
-path="res://.godot/imported/marine.glb-64625d956522a2a0ca77fc35ae50426b.scn"
+path="res://.godot/imported/marine.glb-daeeeb56dab4f262b68a88d739b19200.scn"
 
 [deps]
 
-source_file="res://marine.glb"
-dest_files=["res://.godot/imported/marine.glb-64625d956522a2a0ca77fc35ae50426b.scn"]
+source_file="res://marine/marine.glb"
+dest_files=["res://.godot/imported/marine.glb-daeeeb56dab4f262b68a88d739b19200.scn"]
 
 [params]
 
@@ -34,9 +34,9 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-materials/extract=0
+materials/extract=2
 materials/extract_format=0
-materials/extract_path=""
+materials/extract_path="res://marine/materials"
 _subresources={
 "animations": {
 "idle": {
@@ -6206,6 +6206,38 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
+}
+},
+"materials": {
+"Material": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://marine/materials/Material.tres",
+"use_external/path": "uid://m7nugua6t14a"
+},
+"Material.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://marine/materials/Material.001.tres",
+"use_external/path": "uid://cgh1gu4gcywfx"
+},
+"armor": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://marine/materials/armor.tres",
+"use_external/path": "uid://1he28yyqv76x"
+},
+"eyes": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://marine/materials/eyes.tres",
+"use_external/path": "uid://b7r3j8gedygxc"
+},
+"gun": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://marine/materials/gun.tres",
+"use_external/path": "uid://cl126a7gi1pfp"
+},
+"mouth": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://marine/materials/mouth.tres",
+"use_external/path": "uid://b1o4oabeqyk5a"
 }
 }
 }

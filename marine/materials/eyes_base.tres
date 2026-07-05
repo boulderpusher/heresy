@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dhiyka7rdpeqy"]
+
+[resource]
+resource_name = "eyes_base"
+cull_mode = 2
+roughness = 0.5

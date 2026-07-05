@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://js6lxfq740wn"]
+
+[resource]
+resource_name = "armor"
+cull_mode = 2
+albedo_color = Color(0.7193531, 0, 0.013094067, 1)
+roughness = 0.60714287

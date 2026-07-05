@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://iiexcvlhkqf6"
-path="res://.godot/imported/boltgun.glb-1e542ab9191a48c4c29248a0c7ead4da.scn"
+path="res://.godot/imported/boltgun.glb-fcc015053c574a25ab2caee07c57610c.scn"
 
 [deps]
 
-source_file="res://boltgun.glb"
-dest_files=["res://.godot/imported/boltgun.glb-1e542ab9191a48c4c29248a0c7ead4da.scn"]
+source_file="res://marine/boltgun.glb"
+dest_files=["res://.godot/imported/boltgun.glb-fcc015053c574a25ab2caee07c57610c.scn"]
 
 [params]
 
