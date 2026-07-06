@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://1rw8vu6bm2lc" path="res://marine/materials/armor_base.tres" id="3_oxvmo"]
 [ext_resource type="Material" uid="uid://dhiyka7rdpeqy" path="res://marine/materials/eyes_base.tres" id="4_3cu3l"]
 [ext_resource type="Material" uid="uid://b1o4oabeqyk5a" path="res://marine/materials/mouth.tres" id="5_ohi6f"]
+[ext_resource type="Script" uid="uid://dhjbd8ytmnrqv" path="res://marine/health_bar.gd" id="6_3cu3l"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mpoio"]
 _surfaces = [{
@@ -83,8 +84,18 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mpoio")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8oeqk"]
+size = Vector3(2.4398193, 4.3340454, 1.0688171)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oxvmo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxvmo"]
+bg_color = Color(0.87736005, 0, 0.012203359, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cu3l"]
+bg_color = Color(0.34546116, 0.5514643, 0, 1)
 
 [node name="Marine" type="CharacterBody3D" unique_id=954533674]
+collision_mask = 7
 script = ExtResource("1_ygtmd")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=2016160121]
@@ -171,7 +182,31 @@ transform = Transform3D(0.009970136, -0.11568696, -0.9932356, 0.0829551, -0.9897
 [node name="upper_leg_R" parent="Pivot/Body/Armature/Skeleton3D" index="16" unique_id=2123249378]
 transform = Transform3D(-0.0013614544, -0.089185536, -0.996014, -0.014801736, -0.99590397, 0.08919588, -0.9998896, 0.014864148, 3.5788293e-05, -0.45673838, 2.068494, 0.089850254)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=321757418]
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=321757418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032165527, 2.015904, 0.10908508)
 shape = SubResource("BoxShape3D_8oeqk")
+
+[node name="AttackRange" type="Area3D" parent="." unique_id=1343137081 groups=["blue_team", "red_team"]]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange" unique_id=1493977116]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+shape = SubResource("SphereShape3D_oxvmo")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1785384898]
+offset_right = 20.0
+offset_bottom = 5.0
+theme_override_styles/background = SubResource("StyleBoxFlat_oxvmo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3cu3l")
+value = 50.0
+show_percentage = false
+script = ExtResource("6_3cu3l")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=686688658]
+wait_time = 0.5
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 
 [editable path="Pivot/Body"]
