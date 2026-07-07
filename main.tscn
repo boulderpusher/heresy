@@ -5,22 +5,23 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(100, 2, 100)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.41981313, 0.41981313, 0.4198131, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
+material = SubResource("StandardMaterial3D_h2yge")
 size = Vector3(100, 2, 100)
 
-[sub_resource type="Curve3D" id="Curve3D_ig7tw"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -50, 0, -50, 0, 0, 0, 0, 0, 0, -50, 0, 50),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(100, 5, 20)
 
-[sub_resource type="Curve3D" id="Curve3D_0xm2m"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 50, 0, -50, 0, 0, 0, 0, 0, 0, 50, 0, 50),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+transparency = 1
+albedo_color = Color(0.2784314, 0.23921569, 1, 0.19607843)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+material = SubResource("StandardMaterial3D_ig7tw")
+size = Vector3(100, 5, 20)
 
 [node name="Main" type="Node" unique_id=1910534665]
 script = ExtResource("1_1bvp3")
@@ -41,26 +42,52 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3
 shadow_enabled = true
 
 [node name="CameraPivot" type="Marker3D" parent="." unique_id=922424908]
-transform = Transform3D(1, 0, 0, 0, 0.49999988, 0.86602527, 0, -0.86602527, 0.49999988, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=579722208]
-transform = Transform3D(1, 0, 0, 0, 1.0000002, 5.9604645e-08, 0, -2.9802322e-08, 1.0000002, 0, -16.411, 65.851)
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 100, 0)
 
-[node name="Timer" type="Timer" parent="." unique_id=1783113795]
-wait_time = 3.0
-one_shot = true
-autostart = true
+[node name="SpawnArea" type="Area3D" parent="." unique_id=195647814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 40)
 
-[node name="SpawnPathBlue" type="Path3D" parent="." unique_id=1173726722]
-curve = SubResource("Curve3D_ig7tw")
-debug_custom_color = Color(0.2739772, 0.23735118, 1, 1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea" unique_id=372960175]
+shape = SubResource("BoxShape3D_ig7tw")
 
-[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPathBlue" unique_id=1187663593]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -50, 0, -50)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea" unique_id=1987704165]
+mesh = SubResource("BoxMesh_0xm2m")
 
-[node name="SpawnPathRed" type="Path3D" parent="." unique_id=321108960]
-curve = SubResource("Curve3D_0xm2m")
-debug_custom_color = Color(0.77049994, 0, 0.14954075, 1)
+[node name="SpawnUI" type="Control" parent="." unique_id=1145784332]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPathRed" unique_id=1938184172]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 50, 0, -50)
+[node name="Label" type="Label" parent="SpawnUI" unique_id=1967145546]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.5
+offset_right = 71.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Prepare for battle."
+
+[node name="BoxContainer" type="BoxContainer" parent="SpawnUI" unique_id=849803075]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="SpawnUI/BoxContainer" unique_id=722190624]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Spawn Marine
+"
+
+[connection signal="pressed" from="SpawnUI/BoxContainer/Button" to="." method="_spawn_marine_to_cursor"]

@@ -22,6 +22,7 @@ enum State {IDLE, WALKING, ATTACKING}
 var _state = State.IDLE
 var _target: Node3D
 var _can_attack: bool = true
+var _is_active: bool = false
 
 func _ready():
 	_skeleton = get_node("Pivot/Body/Armature/Skeleton3D")

@@ -10,10 +10,19 @@ var marine_scene = preload("res://marine/marine.tscn")
 var _units: Array[Marine]
 
 func _ready() -> void:
-	_spawn_armies()
+	pass
+	#_spawn_armies()
 
 func _process(delta: float) -> void:
 	pass
+
+func _spawn_marine_to_cursor():
+	var marine = marine_scene.instantiate()
+	marine.initialize(get_viewport().get_mouse_position(), Vector3(0, 0, 1))
+	marine.set_team(Team.BLUE)
+	marine.add_to_group("blue_team")
+	add_child(marine)
+
 
 func _spawn_armies():
 	var spawn_location_blue = $SpawnPathBlue/SpawnLocation
