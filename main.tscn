@@ -23,7 +23,7 @@ albedo_color = Color(0.2784314, 0.23921569, 1, 0.19607843)
 material = SubResource("StandardMaterial3D_ig7tw")
 size = Vector3(100, 5, 20)
 
-[node name="Main" type="Node" unique_id=1910534665]
+[node name="Main" type="Node3D" unique_id=954975630]
 script = ExtResource("1_1bvp3")
 n_allies = 5
 n_enemies = 7
@@ -46,6 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=579722208]
 transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 100, 0)
+current = true
 
 [node name="SpawnArea" type="Area3D" parent="." unique_id=195647814]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 40)
@@ -84,10 +85,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Button" type="Button" parent="SpawnUI/BoxContainer" unique_id=722190624]
+[node name="SpawnMarineButton" type="Button" parent="SpawnUI/BoxContainer" unique_id=722190624]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Spawn Marine
 "
 
-[connection signal="pressed" from="SpawnUI/BoxContainer/Button" to="." method="_spawn_marine_to_cursor"]
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=518387322]
+
+[connection signal="pressed" from="SpawnUI/BoxContainer/SpawnMarineButton" to="." method="_on_spawn_marine_button_pressed"]

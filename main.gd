@@ -1,5 +1,5 @@
 class_name Main
-extends Node
+extends Node3D
 
 @export var n_allies: int
 @export var n_enemies: int
@@ -8,21 +8,33 @@ enum Team {BLUE, RED}
 
 var marine_scene = preload("res://marine/marine.tscn")
 var _units: Array[Marine]
+var _unit_to_spawn
+var _camera: Camera3D
+var _raycast: RayCast3D
+
+const RAY_LENGTH = 1000
 
 func _ready() -> void:
-	pass
-	#_spawn_armies()
+	_camera = $CameraPivot/Camera3D
+	_raycast = $RayCast3D
 
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	if _unit_to_spawn:
+		var mousepos = get_viewport().get_mouse_position()
+		_raycast.origin = _camera.project_ray_origin(mousepos)
+		_raycast.target_position = _camera.project_ray_normal(mousepos) * RAY_LENGTH
+		_raycast.force_update()
+		if _raycast.is_colliding():
+			var collider = _raycast.get_collider()
+			
 
-func _spawn_marine_to_cursor():
+func _on_spawn_marine_button_pressed() -> void:
 	var marine = marine_scene.instantiate()
-	marine.initialize(get_viewport().get_mouse_position(), Vector3(0, 0, 1))
-	marine.set_team(Team.BLUE)
-	marine.add_to_group("blue_team")
 	add_child(marine)
-
+	marine.set_team(Team.BLUE)
+	marine.hide()
+	_unit_to_spawn = marine
+	
 
 func _spawn_armies():
 	var spawn_location_blue = $SpawnPathBlue/SpawnLocation
