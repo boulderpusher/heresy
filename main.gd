@@ -8,7 +8,10 @@ enum Team {BLUE, RED}
 
 var marine_scene = preload("res://marine/marine.tscn")
 var _units: Array[Marine]
+
 var _unit_to_spawn
+var _spawnable: bool
+
 var _camera: Camera3D
 var _raycast: RayCast3D
 
@@ -21,12 +24,23 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if _unit_to_spawn:
 		var mousepos = get_viewport().get_mouse_position()
-		_raycast.origin = _camera.project_ray_origin(mousepos)
+		_raycast.position = _camera.project_ray_origin(mousepos)
 		_raycast.target_position = _camera.project_ray_normal(mousepos) * RAY_LENGTH
-		_raycast.force_update()
+		_raycast.force_raycast_update()
 		if _raycast.is_colliding():
 			var collider = _raycast.get_collider()
-			
+			if collider == $Ground:
+				var spawn_point = _raycast.get_collision_point()
+				_unit_to_spawn.position = spawn_point
+				if _unit_to_spawn in $SpawnArea.get_overlapping_bodies():
+					_unit_to_spawn.show()
+					_spawnable = true
+				else:
+					_unit_to_spawn.hide()
+					_spawnable = false
+		else:
+			_unit_to_spawn.hide()
+			_spawnable = false
 
 func _on_spawn_marine_button_pressed() -> void:
 	var marine = marine_scene.instantiate()
@@ -35,6 +49,13 @@ func _on_spawn_marine_button_pressed() -> void:
 	marine.hide()
 	_unit_to_spawn = marine
 	
+func _input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+		if _spawnable:
+			_unit_to_spawn.add_to_group("blue_team")
+			_units.append(_unit_to_spawn)
+			_unit_to_spawn = null
+			_spawnable = false
 
 func _spawn_armies():
 	var spawn_location_blue = $SpawnPathBlue/SpawnLocation

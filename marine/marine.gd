@@ -32,7 +32,7 @@ func _ready():
 	_current_health = max_health
 	_health_bar.value = _current_health
 	_enemy_group = "red_team" if _team == Main.Team.BLUE else "blue_team"
-	_select_new_target()
+	_health_bar.hide()
 
 func _process(delta):
 	if _state == State.ATTACKING: # state machine deez nuts
@@ -43,8 +43,9 @@ func _process(delta):
 		_idle()
 			
 func _physics_process(_delta):
-	velocity = _direction.normalized() * _speed
-	move_and_slide()
+	if _is_active:
+		velocity = _direction.normalized() * _speed
+		move_and_slide()
 
 func initialize(initial_position, initial_direction):
 	position = initial_position
