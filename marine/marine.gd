@@ -51,6 +51,14 @@ func initialize(initial_position, initial_direction):
 	position = initial_position
 	_direction = initial_direction
 
+func activate():
+	_is_active = true
+	_select_new_target()
+
+func deactivate():
+	_is_active = false
+	_state = State.IDLE
+
 func _attack():
 	if not _target:
 		_select_new_target()
@@ -152,7 +160,8 @@ func _on_attack_cooldown_timeout() -> void:
 	_can_attack = true
 
 func _on_attack_range_body_entered(body: Node3D) -> void:
-	if _state != State.ATTACKING:
-		_set_state(State.ATTACKING)
-		_target = body
+	if _is_active:
+		if _state != State.ATTACKING:
+			_set_state(State.ATTACKING)
+			_target = body
 		

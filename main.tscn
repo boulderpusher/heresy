@@ -12,6 +12,9 @@ albedo_color = Color(0.41981313, 0.41981313, 0.4198131, 1)
 material = SubResource("StandardMaterial3D_h2yge")
 size = Vector3(100, 2, 100)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(1000, 2, 1000)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
 size = Vector3(100, 5, 20)
 
@@ -37,6 +40,14 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1434455216]
 mesh = SubResource("BoxMesh_ig7tw")
 
+[node name="OutOfBounds" type="StaticBody3D" parent="." unique_id=1879437046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OutOfBounds" unique_id=1504183219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2034325316]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 34.152317, 0)
 shadow_enabled = true
@@ -50,12 +61,15 @@ current = true
 
 [node name="SpawnArea" type="Area3D" parent="." unique_id=195647814]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 40)
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea" unique_id=372960175]
 shape = SubResource("BoxShape3D_ig7tw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SpawnArea" unique_id=1987704165]
 mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="MouseRayCast" type="RayCast3D" parent="." unique_id=320818475]
 
 [node name="SpawnUI" type="Control" parent="." unique_id=1145784332]
 layout_mode = 3
@@ -76,21 +90,52 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Prepare for battle."
 
-[node name="BoxContainer" type="BoxContainer" parent="SpawnUI" unique_id=849803075]
+[node name="BattleButton" type="Button" parent="SpawnUI" unique_id=67436244]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -44.0
+offset_bottom = 44.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+text = "BATTLE"
 
-[node name="SpawnMarineButton" type="Button" parent="SpawnUI/BoxContainer" unique_id=722190624]
-layout_mode = 2
+[node name="SpawnMarineButton" type="Button" parent="SpawnUI" unique_id=722190624]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 560.0
+offset_right = 635.0
+offset_bottom = 648.0
 size_flags_horizontal = 6
 text = "Spawn Marine
 "
 
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=518387322]
+[node name="RemoveButton" type="Button" parent="SpawnUI" unique_id=1681307523]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_right = 98.0
+grow_vertical = 0
+text = "Remove"
 
-[connection signal="pressed" from="SpawnUI/BoxContainer/SpawnMarineButton" to="." method="_on_spawn_marine_button_pressed"]
+[node name="BattleUI" type="Control" parent="." unique_id=735638282]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EndUI" type="Control" parent="." unique_id=1585315795]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="SpawnUI/BattleButton" to="." method="_on_battle_button_pressed"]
+[connection signal="pressed" from="SpawnUI/SpawnMarineButton" to="." method="_on_spawn_marine_button_pressed"]

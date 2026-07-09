@@ -24,6 +24,7 @@ blue_team=""
 3d_physics/layer_1="environment"
 3d_physics/layer_2="blue_team"
 3d_physics/layer_3="red_team"
+3d_physics/layer_4="out_of_bounds"
 
 [physics]
 

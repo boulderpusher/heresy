@@ -95,6 +95,7 @@ bg_color = Color(0.87736005, 0, 0.012203359, 1)
 bg_color = Color(0.34546116, 0.5514643, 0, 1)
 
 [node name="Marine" type="CharacterBody3D" unique_id=954533674]
+collision_layer = 0
 collision_mask = 7
 script = ExtResource("1_ygtmd")
 
