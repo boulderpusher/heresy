@@ -187,7 +187,7 @@ transform = Transform3D(-0.0013614544, -0.089185536, -0.996014, -0.014801736, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032165527, 2.015904, 0.10908508)
 shape = SubResource("BoxShape3D_8oeqk")
 
-[node name="AttackRange" type="Area3D" parent="." unique_id=1343137081 groups=["blue_team", "red_team"]]
+[node name="AttackRange" type="Area3D" parent="." unique_id=1343137081]
 collision_layer = 0
 collision_mask = 0
 

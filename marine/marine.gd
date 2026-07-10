@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Marine
 
+signal dead
+
 @export var speed: float  = 10.0
 @export var max_health: int = 100
 @export var attack_damage: int = 10
@@ -31,13 +33,15 @@ func _ready():
 	_health_bar.max_value = max_health
 	_current_health = max_health
 	_health_bar.value = _current_health
-	_enemy_group = "red_team" if _team == Main.Team.BLUE else "blue_team"
 	_health_bar.hide()
 
 func _process(delta):
 	if _state == State.ATTACKING: # state machine deez nuts
+		if not _target:
+			_select_new_target()
 		_attack()
 	elif _state == State.WALKING:
+		_select_new_target()
 		_walk()
 	elif _state == State.IDLE:
 		_idle()
@@ -53,17 +57,17 @@ func initialize(initial_position, initial_direction):
 
 func activate():
 	_is_active = true
+	_health_bar.show()
 	_select_new_target()
 
 func deactivate():
 	_is_active = false
-	_state = State.IDLE
+	_health_bar.hide()
+	_set_state(State.IDLE)
 
 func _attack():
 	if not _target:
-		_select_new_target()
-		if not _target: # no new target available
-			return
+		return
 	_direction = _target.position - position
 	_look_at(_direction)
 	if _can_attack:
@@ -79,9 +83,12 @@ func take_damage(damage):
 		die()
 		
 func die():
+	dead.emit(self)
 	queue_free()
 	
 func _walk():
+	if not _target:
+		return
 	_direction = _target.position - position
 	_look_at(_direction)
 
@@ -89,7 +96,8 @@ func _idle():
 	pass
 
 func _look_at(direction):
-	$Pivot.basis = Basis.looking_at(direction, Vector3.UP, true)
+	if direction != Vector3.ZERO and direction != Vector3.UP:
+		$Pivot.basis = Basis.looking_at(direction, Vector3.UP, true)
 
 func _set_state(new_state: State):
 	_state = new_state
@@ -130,13 +138,15 @@ func _get_nearest(bodies):
 func set_team(team: Main.Team):
 	if team == Main.Team.BLUE:
 		_team = Main.Team.BLUE
+		_enemy_group = "red_team"
 		_armor_material = load("res://marine/materials/armor_blue.tres")
 		_eyes_material = load("res://marine/materials/eyes_red.tres")
 		set_collision_layer_value(2, true)
 		$AttackRange.set_collision_mask_value(3, true)
 
 	if team == Main.Team.RED:
-		_team = Main.Team.RED 
+		_team = Main.Team.RED
+		_enemy_group = "blue_team"
 		_armor_material = load("res://marine/materials/armor_red.tres")
 		_eyes_material = load("res://marine/materials/eyes_green.tres")
 		set_collision_layer_value(3, true)
@@ -156,6 +166,9 @@ func set_team(team: Main.Team):
 				if material.resource_name == "eyes_base":
 					mesh_instance.set_surface_override_material(surf_idx, _eyes_material)
 
+func get_team():
+	return _team
+
 func _on_attack_cooldown_timeout() -> void:
 	_can_attack = true
 
@@ -164,4 +177,3 @@ func _on_attack_range_body_entered(body: Node3D) -> void:
 		if _state != State.ATTACKING:
 			_set_state(State.ATTACKING)
 			_target = body
-		

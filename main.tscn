@@ -5,11 +5,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(100, 2, 100)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_color = Color(0.41981313, 0.41981313, 0.4198131, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
-material = SubResource("StandardMaterial3D_h2yge")
+material = SubResource("StandardMaterial3D_0xm2m")
 size = Vector3(100, 2, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
@@ -28,8 +28,6 @@ size = Vector3(100, 5, 20)
 
 [node name="Main" type="Node3D" unique_id=954975630]
 script = ExtResource("1_1bvp3")
-n_allies = 5
-n_enemies = 7
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1273857133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -133,9 +131,60 @@ offset_bottom = 40.0
 
 [node name="EndUI" type="Control" parent="." unique_id=1585315795]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Victory" type="ColorRect" parent="EndUI" unique_id=387381867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.6666667, 0.050980393, 0.32156864)
+
+[node name="Label" type="Label" parent="EndUI/Victory" unique_id=682301280]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -11.5
+offset_right = 33.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "VICTORY"
+
+[node name="Defeat" type="ColorRect" parent="EndUI" unique_id=585998719]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.84698284, 0, 0.115767546, 0.32156864)
+
+[node name="Label" type="Label" parent="EndUI/Defeat" unique_id=1208320429]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -11.5
+offset_right = 33.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GET REKT"
 
 [connection signal="pressed" from="SpawnUI/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="SpawnUI/SpawnMarineButton" to="." method="_on_spawn_marine_button_pressed"]
+[connection signal="pressed" from="SpawnUI/RemoveButton" to="." method="_on_remove_button_pressed"]

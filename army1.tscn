@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://ccng57x087yvw"]
+
+[ext_resource type="PackedScene" uid="uid://m3t8o57ghms7" path="res://marine/marine.tscn" id="1_kov8m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boibh"]
+size = Vector3(100, 2, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.41981313, 0.41981313, 0.4198131, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kod4a"]
+material = SubResource("StandardMaterial3D_h2yge")
+size = Vector3(100, 2, 100)
+
+[node name="Army" type="Node3D" unique_id=1062912160]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=447735313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1202173588]
+shape = SubResource("BoxShape3D_boibh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1963412234]
+mesh = SubResource("BoxMesh_kod4a")
+
+[node name="Marine1" parent="." unique_id=954533674 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.047966, 0, -40.4386)
+
+[node name="Marine2" parent="." unique_id=1211483603 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.02594, 0, -40.4386)
+
+[node name="Marine3" parent="." unique_id=900687977 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20415497, 0, -40.4386)
+
+[node name="Marine4" parent="." unique_id=1491825827 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.895439, 0, -40.4386)
+
+[editable path="Marine1"]
+[editable path="Marine1/Pivot/Body"]
