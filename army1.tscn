@@ -20,7 +20,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1202173588]
 shape = SubResource("BoxShape3D_boibh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1963412234]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1963412234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_kod4a")
 
 [node name="Marine1" parent="." unique_id=954533674 instance=ExtResource("1_kov8m")]

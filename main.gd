@@ -31,7 +31,7 @@ func _hide_ui():
 			child.hide()
 
 func _start_phase(phase):
-	_game_phase == phase
+	_game_phase = phase
 	if phase == GamePhase.SPAWN:
 		$SpawnUI.show()
 		$SpawnArea.show()
@@ -58,7 +58,6 @@ func _start_phase(phase):
 			$EndUI/Victory.show()
 		else:
 			$EndUI/Defeat.show()
-		
 		
 func _on_battle_button_pressed() -> void:
 	if not _unit_to_spawn:
@@ -111,6 +110,8 @@ func _spawn_marine(location, direction, team):
 
 func _on_unit_death(unit):
 	_units.erase(unit)
+	unit.remove_from_group("blue_team")
+	unit.remove_from_group("red_team")
 	var team = unit.get_team()
 	_n_units[team] -= 1
 	if _n_units[team] == 0:
@@ -126,7 +127,7 @@ func _on_spawn_marine_button_pressed() -> void:
 func _on_remove_button_pressed() -> void:
 	if _unit_to_spawn:
 		_units.erase(_unit_to_spawn)
-		_unit_to_spawn.free()
+		_unit_to_spawn.queue_free()
 		_spawnable = false
 
 func _input(event):

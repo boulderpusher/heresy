@@ -77,10 +77,11 @@ func _attack():
 		$AttackCooldown.start()
 		
 func take_damage(damage):
-	_current_health = max(0, _current_health - damage)
-	_health_bar.value = _current_health
-	if _current_health == 0:
-		die()
+	if _current_health > 0:
+		_current_health = max(0, _current_health - damage)
+		_health_bar.value = _current_health
+		if _current_health == 0:
+			die()
 		
 func die():
 	dead.emit(self)
