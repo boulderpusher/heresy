@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c1hrso1m3hgdr"]
+
+[ext_resource type="Script" uid="uid://78a0usyj8nsy" path="res://unit.gd" id="1_btf8p"]
+
+[node name="Unit" type="CharacterBody3D" unique_id=98948309]
+script = ExtResource("1_btf8p")

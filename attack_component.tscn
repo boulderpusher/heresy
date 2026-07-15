@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c13ni71n0ghhd"]
+
+[ext_resource type="Script" uid="uid://c0ejgpyevucbx" path="res://attack_component.gd" id="1_3dc41"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3dc41"]
+
+[node name="AttackComponent" type="Node3D" unique_id=1632718827]
+script = ExtResource("1_3dc41")
+
+[node name="Range" type="Area3D" parent="." unique_id=1684081602]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Range" unique_id=1670293381]
+shape = SubResource("SphereShape3D_3dc41")
+
+[node name="Cooldown" type="Timer" parent="." unique_id=1563689206]
