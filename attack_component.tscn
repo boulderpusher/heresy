@@ -6,10 +6,15 @@
 
 [node name="AttackComponent" type="Node3D" unique_id=1632718827]
 script = ExtResource("1_3dc41")
+damage = null
+cooldown = null
+range = null
 
-[node name="Range" type="Area3D" parent="." unique_id=1684081602]
+[node name="AttackRange" type="Area3D" parent="." unique_id=1684081602]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Range" unique_id=1670293381]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange" unique_id=1670293381]
 shape = SubResource("SphereShape3D_3dc41")
 
-[node name="Cooldown" type="Timer" parent="." unique_id=1563689206]
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1563689206]
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

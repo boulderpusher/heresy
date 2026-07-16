@@ -1,7 +1,7 @@
 class_name HealthComponent
 extends ProgressBar
 
-signal dead
+signal health_depleted
 
 @export var max_health: int
 var current_health: int
@@ -29,6 +29,4 @@ func take_damage(damage: int):
 		current_health = max(0, current_health - damage)
 		value = current_health
 		if current_health == 0:
-			dead.emit()
-			
-			
+			health_depleted.emit()
