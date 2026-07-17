@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c13ni71n0ghhd"]
 
-[ext_resource type="Script" uid="uid://c0ejgpyevucbx" path="res://attack_component.gd" id="1_3dc41"]
+[ext_resource type="Script" uid="uid://c0ejgpyevucbx" path="res://units/components/attack_component.gd" id="1_3dc41"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3dc41"]
 

@@ -9,7 +9,7 @@ enum State {IDLE, WALKING, ATTACKING, DEAD}
 @export var max_speed: float
 @export var acceleration: float
 
-var body_component: Node3D
+var body_component: CharacterBody3D
 var health_component: HealthComponent
 var attack_component: AttackComponent
 
@@ -28,6 +28,12 @@ func _ready() -> void:
 	attack_component = $AttackComponent
 	health_component = $HealthComponent
 	health_component.health_depleted.connect(die)
+
+
+func initialize(team, enemies):
+	self.team = team
+	body_component.set_team(team)
+	self.enemies = enemies
 
 
 func _process(delta: float) -> void:

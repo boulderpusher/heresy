@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccng57x087yvw"]
 
-[ext_resource type="PackedScene" uid="uid://m3t8o57ghms7" path="res://marine/marine.tscn" id="1_kov8m"]
+[ext_resource type="PackedScene" uid="uid://m3t8o57ghms7" path="res://units/marine/marine.tscn" id="1_kov8m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_boibh"]
 size = Vector3(100, 2, 100)

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dtq4rv8087i6r"]
+
+[ext_resource type="PackedScene" uid="uid://de6t0scxajica" path="res://units/marine/marine.glb" id="1_vxyih"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g7v6j"]
+size = Vector3(2.822754, 4.4761353, 1.590805)
+
+[node name="MarineBody" unique_id=398600521 instance=ExtResource("1_vxyih")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="3" unique_id=424606005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018798828, 2.2571716, 0.17983246)
+shape = SubResource("BoxShape3D_g7v6j")

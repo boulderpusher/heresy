@@ -4,18 +4,18 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://de6t0scxajica"
-path="res://.godot/imported/marine.glb-daeeeb56dab4f262b68a88d739b19200.scn"
+path="res://.godot/imported/marine.glb-278ad36d959d0442c0292943ffde0d07.scn"
 
 [deps]
 
-source_file="res://marine/marine.glb"
-dest_files=["res://.godot/imported/marine.glb-daeeeb56dab4f262b68a88d739b19200.scn"]
+source_file="res://units/marine/marine.glb"
+dest_files=["res://.godot/imported/marine.glb-278ad36d959d0442c0292943ffde0d07.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="CharacterBody3D"
 nodes/root_name="Marine"
-nodes/root_script=null
+nodes/root_script=Resource("uid://c2stacfqm78me", "res://units/marine/marine_body.gd")
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
@@ -6237,7 +6237,7 @@ _subresources={
 "mouth": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://marine/materials/mouth.tres",
-"use_external/path": "uid://b1o4oabeqyk5a"
+"use_external/path": "res://marine/materials/mouth.tres"
 }
 }
 }

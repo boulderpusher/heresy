@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bx6ad4yrx5dkh"]
 
+[ext_resource type="Script" uid="uid://c2stacfqm78me" path="res://units/marine/marine_body.gd" id="1_nat0j"]
+
 [node name="BodyComponent" type="Node3D" unique_id=671845413]
+script = ExtResource("1_nat0j")
 
 [node name="ref" type="Node3D" parent="." unique_id=562507232]
 

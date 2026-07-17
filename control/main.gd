@@ -1,7 +1,7 @@
 class_name Main
 extends Node3D
 
-enum Team {BLUE, RED}
+enum Team {PLAYER, ENEMY}
 enum GamePhase {SPAWN, BATTLE, END}
 
 var marine_scene = preload("res://marine/marine.tscn")
@@ -39,7 +39,7 @@ func _start_phase(phase):
 	if phase == GamePhase.BATTLE:
 		$SpawnUI.hide()
 		$SpawnArea.hide()
-		_n_units = {Team.BLUE: 0, Team.RED: 0}
+		_n_units = {Team.PLAYER: 0, Team.ENEMY: 0}
 		for unit in _units:
 			_n_units[unit.get_team()] += 1
 		$BattleUI.show()
@@ -54,7 +54,7 @@ func _start_phase(phase):
 		$EndUI.show()
 		$EndUI/Victory.hide()
 		$EndUI/Defeat.hide()
-		if _victor == Team.BLUE:
+		if _victor == Team.PLAYER:
 			$EndUI/Victory.show()
 		else:
 			$EndUI/Defeat.show()
@@ -93,13 +93,13 @@ func _spawn_enemy_army():
 				army.remove_child(child)
 				child.set_owner(null)
 				add_child(child)
-				child.set_team(Team.RED)
-				child.add_to_group("red_team")
+				child.set_team(Team.ENEMY)
+				child.add_to_group("enemy_army")
 				_units.append(child)
 		army.queue_free()
 
 func _spawn_marine(location, direction, team):
-	var team_group = "blue_team" if team == Team.BLUE else "red_team"
+	var team_group = "player_army" if team == Team.PLAYER else "enemy_army"
 	var marine = marine_scene.instantiate()
 	marine.initialize(location, direction)
 	add_child(marine)
@@ -110,18 +110,18 @@ func _spawn_marine(location, direction, team):
 
 func _on_unit_death(unit):
 	_units.erase(unit)
-	unit.remove_from_group("blue_team")
-	unit.remove_from_group("red_team")
+	unit.remove_from_group("player_army")
+	unit.remove_from_group("enemy_army")
 	var team = unit.get_team()
 	_n_units[team] -= 1
 	if _n_units[team] == 0:
-		_victor = Team.BLUE if team == Team.RED else Team.RED
+		_victor = Team.PLAYER if team == Team.ENEMY else Team.ENEMY
 		_start_phase(GamePhase.END)
 
 func _on_spawn_marine_button_pressed() -> void:
 	if _unit_to_spawn:
 		return
-	var marine = _spawn_marine(Vector3(0, 0, 0), Vector3(0, 0, -1), Team.BLUE)
+	var marine = _spawn_marine(Vector3(0, 0, 0), Vector3(0, 0, -1), Team.PLAYER)
 	_unit_to_spawn = marine
 
 func _on_remove_button_pressed() -> void:
