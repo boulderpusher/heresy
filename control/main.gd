@@ -4,8 +4,8 @@ extends Node3D
 enum Team {PLAYER, ENEMY}
 enum GamePhase {SPAWN, BATTLE, END}
 
-var marine_scene = preload("res://marine/marine.tscn")
-var _units: Array[Marine]
+var marine_scene = preload("res://units/marine/marine.tscn")
+var _units: Array[Unit]
 var _n_units: Dictionary
 
 var _game_phase: GamePhase
@@ -89,7 +89,7 @@ func _spawn_enemy_army():
 	if _current_battle == 1:
 		var army = load("res://army1.tscn").instantiate()
 		for child in army.get_children():
-			if child is Marine:
+			if child is Unit:
 				army.remove_child(child)
 				child.set_owner(null)
 				add_child(child)
@@ -142,7 +142,7 @@ func _input(event):
 				raycast.set_collision_mask_value(2, true)
 				raycast.force_raycast_update()
 				var collider = raycast.get_collider()
-				if collider is Marine:
+				if collider is Unit:
 					_unit_to_spawn = collider
 				raycast.set_collision_mask_value(2, false)
 				raycast.set_collision_mask_value(1, true)

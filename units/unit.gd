@@ -20,7 +20,7 @@ var direction: Vector3 = Vector3.ZERO
 
 var team: Main.Team
 var target: Unit = null
-var enemies: Array[Unit]
+var enemies: Array[Node]
 
 
 func _ready() -> void:
@@ -30,13 +30,13 @@ func _ready() -> void:
 	health_component.health_depleted.connect(die)
 
 
-func initialize(team, enemies):
+func initialize(team):
 	self.team = team
 	body_component.set_team(team)
-	self.enemies = enemies
 
 
 func _process(delta: float) -> void:
+	enemies = get_tree().get_nodes_in_group("enemy_army")
 	if is_active:
 		if state == State.IDLE:
 			pass
