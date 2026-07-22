@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Node3D
 
 var _skeleton
 var _armor_material: Material

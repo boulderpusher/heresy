@@ -4,7 +4,7 @@ extends Node3D
 enum Team {PLAYER, ENEMY}
 enum GamePhase {SPAWN, BATTLE, END}
 
-var marine_scene = preload("res://units/marine/marine.tscn")
+#var marine_scene = preload("res://units/marine/marine.tscn")
 var _units: Array[Unit]
 var _n_units: Dictionary
 

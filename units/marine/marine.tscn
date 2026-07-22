@@ -1,19 +1,26 @@
-[gd_scene format=3 uid="uid://cgksa2u7yvm10"]
+[gd_scene format=3 uid="uid://dtq4rv8087i6r"]
 
-[ext_resource type="Script" uid="uid://78a0usyj8nsy" path="res://units/unit.gd" id="1_68hgb"]
-[ext_resource type="PackedScene" uid="uid://dtq4rv8087i6r" path="res://units/marine/marine_body.tscn" id="1_wqxfj"]
-[ext_resource type="PackedScene" uid="uid://c13ni71n0ghhd" path="res://units/components/attack_component.tscn" id="2_68hgb"]
-[ext_resource type="PackedScene" uid="uid://bfk27t6mktah3" path="res://units/components/health_component.tscn" id="3_ags6y"]
+[ext_resource type="PackedScene" uid="uid://djrx5fluiuckx" path="res://units/marine/marine_body.tscn" id="1_wqxfj"]
+[ext_resource type="Script" uid="uid://c2stacfqm78me" path="res://units/marine/marine_body.gd" id="2_68hgb"]
+[ext_resource type="PackedScene" uid="uid://c13ni71n0ghhd" path="res://units/components/attack_component.tscn" id="3_ags6y"]
+[ext_resource type="PackedScene" uid="uid://bfk27t6mktah3" path="res://units/components/health_component.tscn" id="4_68hgb"]
 
-[node name="Marine" type="CharacterBody3D" unique_id=1640201844]
-script = ExtResource("1_68hgb")
+[sub_resource type="BoxShape3D" id="BoxShape3D_8esxt"]
+size = Vector3(2.7539063, 4.4501343, 1.6960602)
 
-[node name="MarineBody" parent="." unique_id=398600521 instance=ExtResource("1_wqxfj")]
+[node name="Marine" type="CharacterBody3D" unique_id=1940411794]
 
-[node name="AttackComponent" parent="." unique_id=1632718827 instance=ExtResource("2_68hgb")]
+[node name="MarineBody" parent="." unique_id=1231747720 instance=ExtResource("1_wqxfj")]
+script = ExtResource("2_68hgb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1968455180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0146484375, 2.2308655, 0.2716751)
+shape = SubResource("BoxShape3D_8esxt")
+
+[node name="AttackComponent" parent="." unique_id=1632718827 instance=ExtResource("3_ags6y")]
 damage = 10
-cooldown = 1.0
-range = 50.0
+cooldown = 0.5
+range = 10.0
 
-[node name="HealthComponent" parent="." unique_id=1670318220 instance=ExtResource("3_ags6y")]
-max_health = 100
+[node name="HealthComponent" parent="." unique_id=1670318220 instance=ExtResource("4_68hgb")]
+max_health = 50
