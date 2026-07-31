@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccng57x087yvw"]
 
-[ext_resource type="PackedScene" uid="uid://m3t8o57ghms7" path="res://units/marine/marine.tscn" id="1_kov8m"]
+[ext_resource type="PackedScene" uid="uid://dtq4rv8087i6r" path="res://units/marine/marine.tscn" id="1_kov8m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_boibh"]
 size = Vector3(100, 2, 100)
@@ -24,17 +24,11 @@ shape = SubResource("BoxShape3D_boibh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_kod4a")
 
-[node name="Marine1" parent="." unique_id=954533674 instance=ExtResource("1_kov8m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.047966, 0, -40.4386)
+[node name="Marine" parent="." unique_id=1940411794 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.458836, 0, -26.129936)
 
-[node name="Marine2" parent="." unique_id=1211483603 instance=ExtResource("1_kov8m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.02594, 0, -40.4386)
+[node name="Marine2" parent="." unique_id=1288079444 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.376497, 0, -26.129936)
 
-[node name="Marine3" parent="." unique_id=900687977 instance=ExtResource("1_kov8m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20415497, 0, -40.4386)
-
-[node name="Marine4" parent="." unique_id=1491825827 instance=ExtResource("1_kov8m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.895439, 0, -40.4386)
-
-[editable path="Marine1"]
-[editable path="Marine1/Pivot/Body"]
+[node name="Marine3" parent="." unique_id=870136909 instance=ExtResource("1_kov8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.129936)

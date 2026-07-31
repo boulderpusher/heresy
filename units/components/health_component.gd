@@ -7,6 +7,7 @@ signal health_depleted
 var current_health: int
 var parent: Node3D
 var camera: Camera3D
+var _is_active: bool = false
 
 
 func _ready() -> void:
@@ -19,7 +20,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	position = camera.unproject_position(parent.global_position) + Vector2(-size.x/2, 0) + Vector2(0, -20)
+	if _is_active:
+		position = camera.unproject_position(parent.global_position) + Vector2(-size.x/2, 0) + Vector2(0, -20)
 	#if _camera.is_position_behind(_parent.position):
 	#	visible = false
 
@@ -30,3 +32,12 @@ func take_damage(damage: int):
 		value = current_health
 		if current_health == 0:
 			health_depleted.emit()
+
+
+func activate():
+	_is_active = true
+	
+	
+func deactivate():
+	_is_active = false
+	

@@ -1,12 +1,18 @@
 extends Node3D
 
-var _skeleton
+var _skeleton: Skeleton3D
+var _animation_player: AnimationPlayer
 var _armor_material: Material
 var _eyes_material: Material
 
 
 func _ready():
 	_skeleton = $Armature/Skeleton3D
+	_animation_player = $AnimationPlayer
+
+
+func play_animation(animation):
+	_animation_player.play(animation)
 
 
 # store team and change armor color

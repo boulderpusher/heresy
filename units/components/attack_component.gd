@@ -4,7 +4,7 @@ extends Node3D
 
 @export var damage: int
 @export var cooldown: float
-@export var range: float
+@export var attack_range: float
 
 var is_active: bool = false
 var is_ready: bool = true
@@ -14,7 +14,7 @@ var target: Unit
 func _ready() -> void:
 	cooldown_timer = $CooldownTimer
 	cooldown_timer.wait_time = cooldown
-	$AttackRange/CollisionShape3D/SphereShape3D.radius = range
+	$AttackRange/CollisionShape3D.shape.radius = attack_range
 
 
 func _process(delta: float) -> void:

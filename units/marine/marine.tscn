@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dtq4rv8087i6r"]
 
+[ext_resource type="Script" uid="uid://y2c11hguhrp" path="res://units/marine/marine.gd" id="1_ags6y"]
 [ext_resource type="PackedScene" uid="uid://djrx5fluiuckx" path="res://units/marine/marine_body.tscn" id="1_wqxfj"]
 [ext_resource type="Script" uid="uid://c2stacfqm78me" path="res://units/marine/marine_body.gd" id="2_68hgb"]
 [ext_resource type="PackedScene" uid="uid://c13ni71n0ghhd" path="res://units/components/attack_component.tscn" id="3_ags6y"]
@@ -9,6 +10,11 @@
 size = Vector3(2.7539063, 4.4501343, 1.6960602)
 
 [node name="Marine" type="CharacterBody3D" unique_id=1940411794]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("1_ags6y")
+max_speed = 10.0
+acceleration = 10.0
 
 [node name="MarineBody" parent="." unique_id=1231747720 instance=ExtResource("1_wqxfj")]
 script = ExtResource("2_68hgb")
@@ -20,7 +26,7 @@ shape = SubResource("BoxShape3D_8esxt")
 [node name="AttackComponent" parent="." unique_id=1632718827 instance=ExtResource("3_ags6y")]
 damage = 10
 cooldown = 0.5
-range = 10.0
+attack_range = 20.0
 
 [node name="HealthComponent" parent="." unique_id=1670318220 instance=ExtResource("4_68hgb")]
 max_health = 50
