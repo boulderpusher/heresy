@@ -1,6 +1,7 @@
 class_name AttackComponent
 extends Node3D
 
+signal shot
 
 @export var damage: int
 @export var cooldown: float
@@ -10,6 +11,7 @@ var is_active: bool = false
 var is_ready: bool = true
 var cooldown_timer: Timer
 var target: Unit
+var _team: Main.Team
 
 func _ready() -> void:
 	cooldown_timer = $CooldownTimer
@@ -17,9 +19,18 @@ func _ready() -> void:
 	$AttackRange/CollisionShape3D.shape.radius = attack_range
 
 
+func set_team(team):
+	_team = team
+	if team == Main.Team.PLAYER:
+		$AttackRange.set_collision_mask_value(3, true)
+	else:
+		$AttackRange.set_collision_mask_value(2, true)
+
+
 func _process(delta: float) -> void:
 	if is_active and is_ready:
 		attack()
+		shot.emit()
 
 
 func activate():
@@ -39,7 +50,7 @@ func is_target_in_range():
 
 
 func attack():
-	if target:
+	if target and is_target_in_range():
 		target.take_hit(damage)
 	cooldown_timer.start()
 	is_ready = false

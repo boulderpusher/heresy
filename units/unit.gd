@@ -17,6 +17,7 @@ var _direction: Vector3 = Vector3.ZERO
 var _team: Main.Team
 var _target: Unit = null
 var _enemies: Array[Node]
+var _enemy_group
 
 
 func find_nearest(bodies):
@@ -32,7 +33,7 @@ func find_nearest(bodies):
 
 func activate():
 	_is_active = true
-
+	_enemy_group = "enemy_army" if _team == Main.Team.PLAYER else "player_army"
 
 func deactivate():
 	_is_active = false
@@ -44,4 +45,4 @@ func get_team():
 
 func die():
 	_state = State.DEAD
-	died.emit()
+	died.emit(self)

@@ -72,7 +72,6 @@ func _on_battle_button_pressed() -> void:
 func _physics_process(delta: float) -> void:
 	if _game_phase == GamePhase.SPAWN and _unit_to_spawn:
 		_unit_to_mouse()
-		print(_unit_to_spawn.position)
 
 
 func _raycast_mouse():
@@ -125,6 +124,7 @@ func _on_unit_death(unit):
 	unit.remove_from_group("player_army")
 	unit.remove_from_group("enemy_army")
 	var team = unit.get_team()
+	unit.queue_free()
 	_n_units[team] -= 1
 	if _n_units[team] == 0:
 		_victor = Team.PLAYER if team == Team.ENEMY else Team.ENEMY
