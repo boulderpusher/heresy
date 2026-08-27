@@ -110,6 +110,7 @@ func _spawn_enemy_army():
 func _spawn_marine(location, direction, team):
 	var team_group = "player_army" if team == Team.PLAYER else "enemy_army"
 	var marine = marine_scene.instantiate()
+	marine.visible = false
 	add_child(marine)
 	marine.position = location
 	marine.look_at(direction, Vector3(0, 1, 0))
@@ -129,6 +130,7 @@ func _on_unit_death(unit):
 	if _n_units[team] == 0:
 		_victor = Team.PLAYER if team == Team.ENEMY else Team.ENEMY
 		_start_phase(GamePhase.END)
+	
 
 
 func _on_spawn_marine_button_pressed() -> void:
@@ -136,6 +138,8 @@ func _on_spawn_marine_button_pressed() -> void:
 		return
 	var marine = _spawn_marine(Vector3(0, 0, 0), Vector3(0, 0, -1), Team.PLAYER)
 	_unit_to_spawn = marine
+	_unit_to_mouse()
+	marine.visible = true
 
 
 func _on_remove_button_pressed() -> void:

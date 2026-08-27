@@ -28,11 +28,5 @@ damage = 10
 cooldown = 0.5
 attack_range = 20.0
 
-[node name="AttackRange" parent="AttackComponent" index="0" unique_id=1684081602]
-collision_layer = 0
-collision_mask = 0
-
 [node name="HealthComponent" parent="." unique_id=1670318220 instance=ExtResource("4_68hgb")]
 max_health = 50
-
-[editable path="AttackComponent"]

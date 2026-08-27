@@ -26,7 +26,7 @@ func find_nearest(bodies):
 	for body in bodies:
 		var distance = position.distance_to(body.position)
 		if distance < min_distance:
-			min_distance = min_distance
+			min_distance = distance
 			nearest = body
 	return nearest
 
@@ -34,6 +34,7 @@ func find_nearest(bodies):
 func activate():
 	_is_active = true
 	_enemy_group = "enemy_army" if _team == Main.Team.PLAYER else "player_army"
+
 
 func deactivate():
 	_is_active = false
